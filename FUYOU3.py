@@ -73,6 +73,24 @@ def load_help_content():
 def display_help_section():
     """ヘルプセクションを表示"""
     with st.sidebar:
+        # サイドバーの幅を広げるためのCSS
+        st.markdown("""
+        <style>
+        .css-1d391kg {
+            width: 400px;
+        }
+        .css-1cypcdb {
+            width: 400px;
+        }
+        section[data-testid="stSidebar"] {
+            width: 400px !important;
+        }
+        section[data-testid="stSidebar"] > div {
+            width: 400px !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         st.subheader("📖 用語説明")
         help_content = load_help_content()
         
@@ -129,8 +147,8 @@ def main():
     
     st.markdown("---")
     
-    # レスポンシブなレイアウト
-    col1, col2 = st.columns([1, 1])
+    # レスポンシブなレイアウト（サイドバーが広くなった分メインコンテンツを調整）
+    col1, col2 = st.columns([1, 1], gap="medium")
     
     with col1:
         st.markdown("### 【配偶者に関する判定】")
