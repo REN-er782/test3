@@ -39,7 +39,14 @@ def fetch_routes(frm, to):
         time_tag = li.select_one(".time .mark")
         if time_tag:
             m = re.search(r'(?:(\d+)時間)?(\d+)分', time_tag.text)
-            minutes = int(m.group(1) or 0) * 60 + int(m.group(2))
+            if m:
+                minutes = int(m.group(1) or 0) * 60 + int(m.group(2))
+            else:
+                m = re.search(r'(\d+)時間', time_tag.text)
+                if m:
+                    minutes = int(m.group(1)) * 60
+                else:
+                    minutes = None
         else:
             minutes = None
 
